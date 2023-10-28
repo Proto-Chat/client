@@ -69,3 +69,11 @@ export function Socketer(props: SocketerProps) {
 export function useSocket() {
   return useContext(Socket);
 }
+
+export function useSocketMessage(code: number | null, op: number | null, type: number | null, handler: (data: any) => void) {
+  const socket = useSocket();
+  
+  React.useEffect(() => {
+    return socket.catch(code, op, type, handler);
+  }, [code, op, type, handler, socket]);
+}

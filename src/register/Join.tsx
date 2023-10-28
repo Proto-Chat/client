@@ -1,24 +1,24 @@
 import React from 'react';
 import './Join.css';
-import { useSocket } from '../utils/socket';
+import { useSocket, useSocketMessage } from '../utils/socket';
 
 function JoinPage() {
   const socket = useSocket();
 
   const [showCode, setShowCode] = React.useState(false);
   
-  React.useEffect(() => socket.catch(0, 1, null, data => {
+  useSocketMessage(0, 1, null, data => {
     if (data.type === 1) return alert('email already exists!');
     if (data.type === 2) return alert('username already exists!');
 
     setShowCode(true);
-  }), [socket]);
+  });
 
-  React.useEffect(() => socket.catch(0, 2, null, data => {
+  useSocketMessage(0, 2, null, data => {
     if (data.type === 1) return alert('incorrect code!');
     else if (data.type === 2) return alert('code expired!\nplease refresh the page and try again!');
     window.location.href = 'chat.itamarorenn.com';
-  }), [socket]);
+  });
 
   const handleRegister = React.useCallback((event: React.FormEvent) => {
     event.preventDefault();
