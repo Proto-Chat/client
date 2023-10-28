@@ -1,24 +1,19 @@
 import React from 'react';
+import { Routes, Route, BrowserRouter } from 'react-router-dom';
+import JoinPage from './register/Join';
 import './App.css';
+import { Socketer } from './utils/socket';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Socketer>
+      <BrowserRouter>
+        <Routes>
+          <Route path='/register' element={<JoinPage />} />
+        </Routes>
+      </BrowserRouter>
+    </Socketer>
   );
 }
 
-export default App;
+export default React.memo(App);
