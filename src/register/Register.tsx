@@ -1,8 +1,8 @@
 import React from 'react';
-import './Join.css';
+import './Register.css';
 import { useSocket, useSocketMessage } from '../utils/socket';
 
-function JoinPage() {
+function RegisterPage() {
   const socket = useSocket();
   const [showCode, setShowCode] = React.useState(false);
 
@@ -95,4 +95,4 @@ function JoinPage() {
   );
 }
 
-export default React.memo(JoinPage);
+export default React.memo(RegisterPage);

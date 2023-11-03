@@ -1,6 +1,7 @@
 import React from 'react';
 import { Routes, Route, BrowserRouter } from 'react-router-dom';
-import JoinPage from './register/Join';
+import RegisterPage from './register/Register';
+import LoginPage from './login/Login';
 import './App.css';
 import { Socketer } from './utils/socket';
 
@@ -9,7 +10,8 @@ function App() {
     <Socketer>
       <BrowserRouter>
         <Routes>
-          <Route path='/register' element={<JoinPage />} />
+          <Route path='/register' element={<RegisterPage />} />
+          <Route path='/login' element={<LoginPage />} />
         </Routes>
       </BrowserRouter>
     </Socketer>
