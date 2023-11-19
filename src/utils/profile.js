@@ -1,4 +1,4 @@
-import { ws } from "./socket";
+import { ws, API } from "./socket";
 
 export const createTitle = (txt) => {
   const desctitle = document.createElement('h5');
@@ -405,7 +405,7 @@ export function updateField(response) {
     // duplicate code from messages.js (I think)
     //Get the PFP
     var req = new XMLHttpRequest();
-    req.open('GET', `${window.location.origin}/getpfp`, true);
+    req.open('GET', `${API}/getpfp`, true);
     req.responseType = 'arraybuffer';
 
     req.onloadend = () => {
@@ -457,7 +457,7 @@ export async function createPFPChangeInp(isGDM = false) {
       const image = new Image();
       image.onload = (e) => {
         var req = new XMLHttpRequest();
-        req.open('POST', `${window.location.origin}/updatepfp`, true); //CHANGE THIS LATER
+        req.open('POST', `${API}/updatepfp`, true); //CHANGE THIS LATER
 
         req.onloadend = () => {
           URL.revokeObjectURL(file);
@@ -527,7 +527,7 @@ export function setPFP(message = undefined, iconElement = undefined, iconURL = u
 
 export async function getPFP() {
   var req = new XMLHttpRequest();
-  req.open('GET', `${window.location.origin}/getpfp`, true);
+  req.open('GET', `${API}/getpfp`, true);
 
   req.responseType = 'arraybuffer';
 

@@ -1,10 +1,11 @@
 // import React, { useContext } from 'react';
 
-const API = 'localhost:1234';
+export const APIS = 'localhost:1234';
+export const API = 'http://localhost:1234';
 
 function createWSPath() {
   const socketProtocol = (window.location.protocol === 'https:' ? 'wss:' : 'ws:')
-  var echoSocketUrl = socketProtocol + `//${API}`;
+  var echoSocketUrl = socketProtocol + `//${APIS}`;
   echoSocketUrl += '/websocket';
   return echoSocketUrl;
 }

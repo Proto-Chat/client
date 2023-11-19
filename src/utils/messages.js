@@ -4,6 +4,7 @@ import { createImage } from "./images";
 import { requestDM } from "./misc";
 import { playNotification } from "./playNotification";
 import { createProfilePopup } from "./profile";
+import { API } from "./socket";
 
 export function messageRecieved(response) {
   if (response.op != 0 && response.data.channelID != localStorage.getItem('currentChatID')) return;
@@ -305,7 +306,7 @@ export function createNewMessage(msg) {
   else if (msg.content.filename) {
     //Get file
     var req = new XMLHttpRequest();
-    req.open('GET', `${window.location.origin}/msgImg?fname=${msg.content.filename}`, true);
+    req.open('GET', `${API}/msgImg?fname=${msg.content.filename}`, true);
     req.responseType = 'arraybuffer';
 
     req.onloadend = () => {
@@ -449,7 +450,7 @@ export function createDmLink(dmRaw) {
 
   //Get the PFP
   var req = new XMLHttpRequest();
-  req.open('GET', `${window.location.origin}/getpfp`, true);
+  req.open('GET', `${API}/getpfp`, true);
 
   req.responseType = 'arraybuffer';
 
@@ -482,7 +483,7 @@ export function createDmLink(dmRaw) {
 */
 export async function handlePastedImage(file) {
   var req = new XMLHttpRequest();
-  req.open('PUT', `${window.location.origin}/msgImg`, true); //CHANGE THIS LATER
+  req.open('PUT', `${API}/msgImg`, true); //CHANGE THIS LATER
   // req.responseType = 'arraybuffer';
   req.responseType = 'text';
 

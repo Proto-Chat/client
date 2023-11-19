@@ -1,4 +1,4 @@
-import { ws } from "./socket";
+import { ws, API } from "./socket";
 import { setUpUser } from "./initialize";
 import { openDM, showNotif } from "./messages";
 
@@ -95,7 +95,7 @@ export function addToFriendsList(friend, element) {
   
   //Get the PFP
   var req = new XMLHttpRequest();
-  req.open('GET', `${window.location.origin}/getpfp`, true);
+  req.open('GET', `${API}/getpfp`, true);
 
   req.responseType = 'arraybuffer';
 
