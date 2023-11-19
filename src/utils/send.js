@@ -1,4 +1,4 @@
-import { ws } from "../utils/socket";
+import { ws } from "./socket";
 import { getUidFromSid } from "./misc";
 
 export function send() {

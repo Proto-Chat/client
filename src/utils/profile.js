@@ -1,4 +1,4 @@
-import { ws } from "../utils/socket";
+import { ws } from "./socket";
 
 export const createTitle = (txt) => {
   const desctitle = document.createElement('h5');

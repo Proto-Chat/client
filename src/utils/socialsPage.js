@@ -1,10 +1,10 @@
-import { ws } from "../utils/socket";
+import { ws } from "./socket";
 import { setUpUser } from "./initialize";
 import { openDM, showNotif } from "./messages";
 
-const divs = {};
+export const divs = {};
 
-function switchDiv(did) {
+export function switchDiv(did) {
   if (!(did in divs)) return;
   for (const k in divs) {
       if (k == did) divs[k].style.display = 'block';
@@ -12,13 +12,13 @@ function switchDiv(did) {
   }
 }
 
-function changeCol(col) {
+export function changeCol(col) {
   const el = document.getElementsByClassName('addfriendinp')[0];
   el.style.borderStyle = 'solid';
   el.style.borderColor = col;
 }
 
-function createPendingResponseBar(uobj) {
+export function createPendingResponseBar(uobj) {
   changeCol('#00ce00');
   const element = document.getElementById('accept');
 
@@ -58,7 +58,7 @@ function createPendingResponseBar(uobj) {
 }
 
 
-function initializeSocialLayout(ws, response) {
+export function initializeSocialLayout(ws, response) {
   const data = response.data;
   
   const element = document.getElementById('friends');
@@ -84,7 +84,7 @@ function initializeSocialLayout(ws, response) {
 }
 
 
-function addToFriendsList(friend, element) {
+export function addToFriendsList(friend, element) {
   const friendElem = document.createElement('a');
   friendElem.classList.add('friendlist');
   friendElem.classList.add('unselectable');
@@ -122,7 +122,7 @@ function addToFriendsList(friend, element) {
 }
 
 
-function getAddFriendInp(e) {
+export function getAddFriendInp(e) {
   if(e.key != 'Enter') {
       e.target.style.borderStyle = 'none';
       return
@@ -136,7 +136,7 @@ function getAddFriendInp(e) {
 }
 
 
-function getFriendRequestResponse(ws, response) {
+export function getFriendRequestResponse(ws, response) {
   if (response.op == "404") return alert("USERNAME NOT FOUND!");
   
   const data = response.data;
@@ -173,7 +173,7 @@ function getFriendRequestResponse(ws, response) {
 }
 
 
-function recieveNewFriendRequest(ws, response) {
+export function recieveNewFriendRequest(ws, response) {
   const element = document.getElementsByClassName('toolbar')[0];
 
   if (element.children.length <= 2) {

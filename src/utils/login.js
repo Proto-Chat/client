@@ -1,4 +1,4 @@
-import { ws } from "../utils/socket";
+import { ws } from "./socket";
 import { loadingAnimInterval } from "./misc";
 
 export function showLogin() {

@@ -1,20 +1,18 @@
 import React from 'react';
 import { Routes, Route, BrowserRouter } from 'react-router-dom';
-import RegisterPage from './register/Register';
-import LoginPage from './login/Login';
-import './App.css';
-import { Socketer } from './utils/socket';
+import HomePage from './pages/Home';
+import JoinPage from './pages/Join';
+import SocialPage from './pages/Social';
 
 function App() {
   return (
-    <Socketer>
-      <BrowserRouter>
-        <Routes>
-          <Route path='/register' element={<RegisterPage />} />
-          <Route path='/login' element={<LoginPage />} />
-        </Routes>
-      </BrowserRouter>
-    </Socketer>
+    <BrowserRouter>
+      <Routes>
+        <Route path='/join' element={<JoinPage />} />
+        <Route path='/social' element={<SocialPage />} />
+        <Route path='/' element={<HomePage />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 

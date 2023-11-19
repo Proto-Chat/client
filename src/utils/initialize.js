@@ -1,4 +1,4 @@
-import { ws } from "../utils/socket";
+import { ws } from "./socket";
 import { createGifPopup } from "./gifs";
 import { logout } from "./login";
 import { createDMTopBar, createDmLink, createNewMessage, handlePastedImage } from "./messages";

@@ -1,8 +1,8 @@
-import { ws } from "../utils/socket";
+import { ws } from "./socket";
 import { setupDM } from "./initialize";
 import { pfpCloseFnct } from "./profile";
 
-function sendDmCreateRequest(e) {
+export function sendDmCreateRequest(e) {
   e.preventDefault();
   const selectionDiv = document.getElementById('groupdDMSelectionDiv');
   const toAdd = [];
@@ -31,7 +31,7 @@ function sendDmCreateRequest(e) {
 }
 
 
-function displayFriendsList(response) {
+export function displayFriendsList(response) {
   const br = (el) => el.appendChild(document.createElement('br'));
   
   const wrapperDiv = document.createElement('div');
@@ -94,7 +94,7 @@ function displayFriendsList(response) {
 }
 
 
-function setupGroupDM(response) {
+export function setupGroupDM(response) {
   const data = response.data;
   const user = JSON.parse(localStorage.getItem('user'));
   const others = data.configs.uids.filter((o) => (o != user.id));

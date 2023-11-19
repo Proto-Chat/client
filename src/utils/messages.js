@@ -1,4 +1,4 @@
-import { ws } from "../utils/socket";
+import { ws } from "./socket";
 import { createGIF, getGif } from "./gifs";
 import { createImage } from "./images";
 import { requestDM } from "./misc";
