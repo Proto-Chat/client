@@ -9,9 +9,9 @@ function createWSPath() {
   return echoSocketUrl;
 }
 
-const ws = new WebSocket(createWSPath());
+export const ws = new WebSocket(createWSPath());
 
-const socket = Object.freeze({
+export const socket = Object.freeze({
   ws,
   catch(code: number | null, op: number | null, type: number | null, handler: (data: any) => void) {
     const then = (message: MessageEvent) => {
