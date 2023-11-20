@@ -7,7 +7,7 @@ import { createProfilePopup } from "./profile";
 import { API } from "./socket";
 
 export function messageRecieved(response) {
-  if (response.op != 0 && response.data.channelID != localStorage.getItem('currentChatID')) return;
+  if (response.op !== 0 && response.data.channelID !== localStorage.getItem('currentChatID')) return;
 
   switch (response.op) {
     case 0: addMessage(response.data);
@@ -43,7 +43,7 @@ export function showNotif(username, content, reason = "msg") {
         playNotification(reason);
 
         notification.onclick = (e) => {
-          if (window.location.pathname != '/') window.location.href = '/';
+          if (window.location.pathname !== '/') window.location.href = '/';
         }
       }
     });
@@ -59,7 +59,7 @@ export function deleteMsg(msgid) {
 
 export function edit(data) {
   const element = document.getElementById(data.msgid);
-  if (!element.tagName == 'INPUT') return;
+  if (!element.tagName === 'INPUT') return;
 
   const newMessageContainer = createNewMessage(data);
   const newMessage = newMessageContainer.children.item(2);
@@ -97,7 +97,7 @@ export function createDMTopBar(data) {
       icon: true,
       me: false,
       isGroupDM: data.isGroupDM,
-      isOwner: (data.configs) ? JSON.parse(localStorage.getItem('user')).uid == data.configs.owner : undefined,
+      isOwner: (data.configs) ? JSON.parse(localStorage.getItem('user')).uid === data.configs.owner : undefined,
       gdmuids: (data.configs) ? data.configs.users : undefined
     });
   }
@@ -108,15 +108,15 @@ export function createDMTopBar(data) {
 
 export async function createContextMenu(e, editable = true) {
   var target;
-  if (e.target.tagName == 'VIDEO' || e.target.tagName == 'IMG') { target = e.target.parentElement }
+  if (e.target.tagName === 'VIDEO' || e.target.tagName === 'IMG') { target = e.target.parentElement }
   else target = e.target;
   const dropdown = document.createElement('div');
   dropdown.className = "msgdropdown";
 
   //#region COMPONENTS
   var currentString;
-  const isGif = (target.firstChild.tagName == 'VIDEO');
-  const isImg = (target.firstChild.tagName == 'IMG');
+  const isGif = (target.firstChild.tagName === 'VIDEO');
+  const isImg = (target.firstChild.tagName === 'IMG');
 
   if (isGif) {
     currentString = String(target.firstChild.src);
@@ -167,21 +167,21 @@ export async function createContextMenu(e, editable = true) {
       var keys = {};
       newinpdiv.onkeydown = (e) => {
         const switchBackFromInp = () => {
-          if (newinpdiv.nextSibling.nodeName == "BR") newinpdiv.nextSibling.remove();
+          if (newinpdiv.nextSibling.nodeName === "BR") newinpdiv.nextSibling.remove();
 
           //Video autoplay stuff
-          if (oldMsg.firstChild.tagName == 'VIDEO') {
+          if (oldMsg.firstChild.tagName === 'VIDEO') {
             oldMsg.firstChild.play();
           }
           newinpdiv.replaceWith(oldMsg);
         }
 
         let { which, type } = e || Event; // to deal with IE
-        let isKeyDown = (type == 'keydown');
+        let isKeyDown = (type === 'keydown');
         keys[which] = isKeyDown;
 
         if (isKeyDown && keys[13] && !keys[16]) {
-          if (newinpdiv.value == oldMsg.innerText) return switchBackFromInp();
+          if (newinpdiv.value === oldMsg.innerText) return switchBackFromInp();
 
           ws.send(JSON.stringify({
             code: 5,
@@ -193,14 +193,14 @@ export async function createContextMenu(e, editable = true) {
               msgid: target.id
             }
           }));
-        } else if (e.code == 'Escape') {
+        } else if (e.code === 'Escape') {
           switchBackFromInp();
         }
       }
 
       newinpdiv.onkeyup = (e) => {
         let { which, type } = e || Event; // to deal with IE
-        let isKeyDown = (type == 'keydown');
+        let isKeyDown = (type === 'keydown');
         keys[which] = isKeyDown;
 
         e.target.style.height = "1px";
@@ -236,7 +236,7 @@ export async function createContextMenu(e, editable = true) {
   //#endregion
 
   window.addEventListener('click', (e2) => {
-    if (e2.target == dropdown) return;
+    if (e2.target === dropdown) return;
     dropdown.remove();
   });
 
@@ -264,7 +264,7 @@ export function createNewMessage(msg) {
   msgContentContainer.className = 'msg';
   msgContentContainer.id = msg.id;
   msgContentContainer.addEventListener('contextmenu', (e) => {
-    if (document.getElementsByClassName('msgdropdown').length != 0) {
+    if (document.getElementsByClassName('msgdropdown').length !== 0) {
       document.getElementsByClassName('msgdropdown')[0].remove();
     }
 
@@ -279,7 +279,7 @@ export function createNewMessage(msg) {
   userDisplay.onclick = (e) => {
     const uconfigs = JSON.parse(localStorage.getItem('user'));
 
-    if (e.target.id == uconfigs.uid) {
+    if (e.target.id === uconfigs.uid) {
       const uelement = document.getElementsByClassName('userprofile')[0];
       if (!uelement) return;
 
@@ -299,7 +299,7 @@ export function createNewMessage(msg) {
   container.appendChild(userDisplay);
   container.appendChild(document.createElement('br'));
 
-  if (msg.content.url && isValidUrl(msg.content.url) && msg.content.url.indexOf('media.tenor.com') != -1) {
+  if (msg.content.url && isValidUrl(msg.content.url) && msg.content.url.indexOf('media.tenor.com') !== -1) {
     msgContentContainer.appendChild(createGIF(msg.content));
     msgContentContainer.style.height = '200px';
   }
@@ -343,17 +343,17 @@ export function addMessage(msg, author = null) {
   }
 
   const uid = JSON.parse(localStorage.getItem('user')).uid;
-  var other_id = msg.channelID.split('|').filter((o) => (o && o != uid)).join("|");
+  var other_id = msg.channelID.split('|').filter((o) => (o && o !== uid)).join("|");
 
   //account for "not-to-self" dm
-  if (!other_id && msg.channelID.split('|').indexOf(uid) != -1) other_id = uid;
+  if (!other_id && msg.channelID.split('|').indexOf(uid) !== -1) other_id = uid;
 
   const otherSplit = other_id.split("|");
-  if (otherSplit[0] == otherSplit[1]) other_id = otherSplit[0];
+  if (otherSplit[0] === otherSplit[1]) other_id = otherSplit[0];
   if (!other_id) return console.log(`ID "${msg.author.uid}" not found!`);
 
   //DM is not the current DM
-  if (msg.channelID != localStorage.getItem('currentChatID') || !document.hasFocus()) {
+  if (msg.channelID !== localStorage.getItem('currentChatID') || !document.hasFocus()) {
     const dmToHighlight = document.getElementById(other_id);
     dmToHighlight.classList.add('unread');
 
@@ -488,7 +488,7 @@ export async function handlePastedImage(file) {
   req.responseType = 'text';
 
   req.onloadend = () => {
-    if (req.response != "OK") alert("request failed!");
+    if (req.response !== "OK") alert("request failed!");
   }
 
   var fname = file.name.split(".");

@@ -8,32 +8,32 @@ export function sendDmCreateRequest(e) {
   const toAdd = [];
 
   for (const child of selectionDiv.children) {
-      if (child.tagName == 'BR') continue;
-      const checkBox = child.firstChild;
-      if (checkBox && checkBox.checked) {
-          const uid = checkBox.id.split('|')[1];
-          if (!uid) continue;
-          toAdd.push(uid);
-      }
+    if (child.tagName === 'BR') continue;
+    const checkBox = child.firstChild;
+    if (checkBox && checkBox.checked) {
+      const uid = checkBox.id.split('|')[1];
+      if (!uid) continue;
+      toAdd.push(uid);
+    }
   }
 
   if (toAdd.length < 2) return alert("please select at least two users!");
   if (toAdd.length > 9) return alert("please select at most ten users!");
 
   ws.send(JSON.stringify({
-      code: 4,
-      op: 8,
-      data: {
-          sid: localStorage.getItem('sessionid'),
-          uids: toAdd
-      }
+    code: 4,
+    op: 8,
+    data: {
+      sid: localStorage.getItem('sessionid'),
+      uids: toAdd
+    }
   }));
 }
 
 
 export function displayFriendsList(response) {
   const br = (el) => el.appendChild(document.createElement('br'));
-  
+
   const wrapperDiv = document.createElement('div');
   wrapperDiv.className = 'profileoutlinediv';
   br(wrapperDiv);
@@ -57,25 +57,25 @@ export function displayFriendsList(response) {
   friends.sort((f1, f2) => (f1.username.toLowerCase() > f2.username.toLowerCase()));
 
   for (const friend of friends) {
-      if (friend.uid == user.uid) continue;
+    if (friend.uid === user.uid) continue;
 
-      const uWrapper = document.createElement('span');
-      uWrapper.className = 'uSelectWrapper';
-      
-      const uCheckBox = document.createElement('input');
-      const id = `groupdmuser|${friend.uid}`;
-      uCheckBox.id = id;
-      uCheckBox.type = 'checkbox';
+    const uWrapper = document.createElement('span');
+    uWrapper.className = 'uSelectWrapper';
 
-      const uLabel = document.createElement('label');
-      uLabel.for = id;
-      uLabel.innerText = friend.username;
+    const uCheckBox = document.createElement('input');
+    const id = `groupdmuser|${friend.uid}`;
+    uCheckBox.id = id;
+    uCheckBox.type = 'checkbox';
 
-      uWrapper.appendChild(uCheckBox);
-      uWrapper.appendChild(uLabel);
-      
-      selectionDiv.appendChild(uWrapper);
-      br(selectionDiv);
+    const uLabel = document.createElement('label');
+    uLabel.for = id;
+    uLabel.innerText = friend.username;
+
+    uWrapper.appendChild(uCheckBox);
+    uWrapper.appendChild(uLabel);
+
+    selectionDiv.appendChild(uWrapper);
+    br(selectionDiv);
   }
   wrapperDiv.appendChild(selectionDiv);
 
@@ -97,15 +97,15 @@ export function displayFriendsList(response) {
 export function setupGroupDM(response) {
   const data = response.data;
   const user = JSON.parse(localStorage.getItem('user'));
-  const others = data.configs.uids.filter((o) => (o != user.id));
+  const others = data.configs.uids.filter((o) => (o !== user.id));
 
   response.data.other = {
-      description: "",
-      icon: data.configs.icon,
-      status: "",
-      uid: others.join("|"),
-      username: data.configs.displayname,
-      othernames: data.unames
+    description: "",
+    icon: data.configs.icon,
+    status: "",
+    uid: others.join("|"),
+    username: data.configs.displayname,
+    othernames: data.unames
   }
   response.data.chatID = data.configs.dmId;
 

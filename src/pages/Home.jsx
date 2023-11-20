@@ -1,5 +1,5 @@
 import React from 'react';
-import { createWS, ws } from '../utils/socket';
+import { createWS } from '../utils/socket';
 import { getPFP, updateField } from '../utils/profile';
 import { showLogin } from '../utils/login';
 import { initializeLayout, setupDM } from '../utils/initialize';
@@ -12,10 +12,10 @@ import "../styles/profile.css";
 
 function connectSocket() {
   const ws = createWS();
-  
+
   ws.addEventListener('open', () => {
     console.log("websocket connection established!");
-    if (localStorage.getItem('sessionid') && localStorage.getItem('sessionid') != "undefined") {
+    if (localStorage.getItem('sessionid') && localStorage.getItem('sessionid') !== "undefined") {
       ws.send(JSON.stringify({ code: 1, op: 0, sid: localStorage.getItem('sessionid') }));
       getPFP();
     } else {
@@ -28,17 +28,17 @@ function connectSocket() {
 
     switch (response.code) {
       case 0:
-        if (response.op == 403) {
+        if (response.op === 403) {
           localStorage.clear();
           window.location.reload();
           return;
         }
-        else if (response.op == 404) {
+        else if (response.op === 404) {
           const el = document.getElementsByClassName('uinp')[0];
           el.style.borderColor = 'red';
           el.style.borderStyle = 'solid';
         }
-        else if (response.op == 401) {
+        else if (response.op === 401) {
           const el = document.getElementsByClassName('uinp')[1];
           el.style.borderColor = 'red';
           el.style.borderStyle = 'solid';
@@ -49,9 +49,8 @@ function connectSocket() {
         }
         break;
 
-      case 1: {
+      case 1:
         initializeLayout(response, sessionStorage.getItem('waitforDM'));
-      }
         break;
 
       case 2: localStorage.removeItem('sessionid');
@@ -59,7 +58,7 @@ function connectSocket() {
         break;
 
       case 3:
-        if (response.op == 0) {
+        if (response.op === 0) {
           if (response.data.isGroupDM) {
             setupGroupDM(response);
           } else {
@@ -71,14 +70,14 @@ function connectSocket() {
             setupDM(response);
           }
         }
-        else if (response.op == 1) closeDM(response);
-        else if (response.op == 2) console.log(response);
+        else if (response.op === 1) closeDM(response);
+        else if (response.op === 2) console.log(response);
         break;
 
       case 4: if ([1, 2, 3, 4].includes(response.op)) return showNotif("friendrequest", `recieved social interaction!`);
-      else if (response.op == 6) updateField(response);
-      else if (response.op == 7) window.location.reload();
-      else if (response.op == 8) displayFriendsList(response);
+      else if (response.op === 6) updateField(response);
+      else if (response.op === 7) window.location.reload();
+      else if (response.op === 8) displayFriendsList(response);
         break;
 
       case 5: messageRecieved(response);

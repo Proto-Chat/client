@@ -20,7 +20,7 @@ export async function getGif(search_term = null, id = null, preview = true) {
 
     // set the state change callback to capture when the response comes in
     xmlHttp.onreadystatechange = () => {
-      if (xmlHttp.readyState == 4 && xmlHttp.status == 200) {
+      if (xmlHttp.readyState === 4 && xmlHttp.status === 200) {
         // parse the json response
         var response_objects = JSON.parse(xmlHttp.responseText);
         const gif = response_objects["results"][0];
@@ -122,7 +122,7 @@ export function createGifPopup() {
 
   var keyUpTimer;
   searchBar.addEventListener('keypress', (e) => {
-    if (e.code == 'Enter' || !searchBar.value) return;
+    if (e.code === 'Enter' || !searchBar.value) return;
     clearInterval(keyUpTimer);
     keyUpTimer = setInterval(() => {
       //get GIF
@@ -147,7 +147,7 @@ export function createGifPopup() {
 
   var xmlHttp = new XMLHttpRequest();
   xmlHttp.onreadystatechange = () => {
-    if (xmlHttp.readyState == 4 && xmlHttp.status == 200) {
+    if (xmlHttp.readyState === 4 && xmlHttp.status === 200) {
       const response = JSON.parse(xmlHttp.responseText);
       const categoriesDiv = document.createElement('div');
       categoriesDiv.className = 'maincontent';
@@ -174,7 +174,7 @@ export function createGifPopup() {
 export function createGifCollectionDisplay(resultContainer, url) {
   var xmlHttp = new XMLHttpRequest();
   xmlHttp.onreadystatechange = () => {
-    if (xmlHttp.readyState == 4 && xmlHttp.status == 200) {
+    if (xmlHttp.readyState === 4 && xmlHttp.status === 200) {
       const response = JSON.parse(xmlHttp.responseText);
 
       resultContainer.dataset.next = response.next;
@@ -187,7 +187,7 @@ export function createGifCollectionDisplay(resultContainer, url) {
           //maybe change this to an implementation that replaces the current div with the new one instead of just appending
           var getNewGIFsReq = new XMLHttpRequest();
           getNewGIFsReq.onreadystatechange = () => {
-            if (getNewGIFsReq.readyState == 4 && getNewGIFsReq.status == 200) {
+            if (getNewGIFsReq.readyState === 4 && getNewGIFsReq.status === 200) {
               const response = JSON.parse(getNewGIFsReq.responseText);
 
               for (const i in response.results) {

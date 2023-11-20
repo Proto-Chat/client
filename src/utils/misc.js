@@ -12,5 +12,5 @@ export const loadingAnimInterval = setInterval(() => {
     return;
   }
   const element = document.getElementById('loadingdiv').firstElementChild;
-  element.style.color = '#'+(0x1000000+Math.random()*0xffffff).toString(16).substr(1,6)
+  element.style.color = '#' + (0x1000000 + Math.random() * 0xffffff).toString(16).substr(1, 6)
 }, 1000);

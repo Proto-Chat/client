@@ -3,8 +3,8 @@ import { createWS, ws } from '../utils/socket';
 import '../styles/login.css';
 
 function recieveCode(data) {
-  if (data.type == 1) return alert('email already exists!');
-  if (data.type == 2) return alert('username already exists!');
+  if (data.type === 1) return alert('email already exists!');
+  if (data.type === 2) return alert('username already exists!');
 
   const element = document.getElementById('signupInpWrapper');
   element.style.display = 'none';
@@ -27,8 +27,8 @@ function sendConfCode() {
 }
 
 function recieveCodeResponse(data) {
-  if (data.type == 1) return alert('incorrect code!');
-  else if (data.type == 2) return alert('code expired!\nplease refresh the page and try again!');
+  if (data.type === 1) return alert('incorrect code!');
+  else if (data.type === 2) return alert('code expired!\nplease refresh the page and try again!');
   window.location.href = '';
 }
 
@@ -64,9 +64,9 @@ function JoinPage() {
 
     ws.addEventListener('message', (message) => {
       const data = JSON.parse(message.data);
-      if (data.code != 0) return;
-      else if (data.op == 1) recieveCode(data);
-      else if (data.op == 2) recieveCodeResponse(data);
+      if (data.code !== 0) return;
+      else if (data.op === 1) recieveCode(data);
+      else if (data.op === 2) recieveCodeResponse(data);
     });
   }, []);
 

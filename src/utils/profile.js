@@ -22,7 +22,7 @@ export function createEditBtn(iid) {
     // editinp.className = '';
     editinp.value = p.innerText;
     editinp.onkeydown = (e) => {
-      if (e.code == 'Escape') {
+      if (e.code === 'Escape') {
         oldmsg.children[0].style.display = 'inline';
         return editinp.replaceWith(oldmsg);
       }
@@ -56,9 +56,9 @@ export function createContentWrapper(udata, titletxt, btnid, fullwrapper = true)
   }
 
   const content = document.createElement('p');
-  content.innerText = (titletxt.toLowerCase() == 'status') ? udata.status : udata.description;
+  content.innerText = (titletxt.toLowerCase() === 'status') ? udata.status : udata.description;
 
-  if (content.innerText == 'undefined') content.innerText = "";
+  if (content.innerText === 'undefined') content.innerText = "";
 
   if (udata.editing) {
     const editbtn = createEditBtn(btnid);
@@ -77,7 +77,7 @@ export async function editComponent(component) {
   var id = component.id;
   if (!id) return;
   id = id.replace('edit', '');
-  if (component.value.length == 0) return;
+  if (component.value.length === 0) return;
   const newVal = component.value.trim();
 
   // Remember ws is a global
@@ -99,7 +99,7 @@ export async function editComponent(component) {
 var keys = {};
 export function handleEnter(e, oldmsg) {
   let { which, type } = e || Event; // to deal with IE
-  let isKeyDown = (type == 'keydown');
+  let isKeyDown = (type === 'keydown');
   keys[which] = isKeyDown;
 
   if (isKeyDown && keys[13]) {
@@ -158,7 +158,7 @@ export async function createProfilePopup(udata) {
   //#region Title and icon
   const pfptitlediv = document.createElement('div');
 
-  if (udata.icon != undefined) {
+  if (udata.icon !== undefined) {
     const icon = document.createElement('img');
     icon.className = 'pfp';
     setPFP(undefined, icon, udata.icourl);
@@ -199,13 +199,13 @@ export async function createProfilePopup(udata) {
   outlineDiv.appendChild(br);
 
   //#region Status
-  if (!udata.isGroupDM && udata.status != undefined) {
+  if (!udata.isGroupDM && udata.status !== undefined) {
     const statuswrapper = createContentWrapper(udata, 'status', 'statedit');
     outlineDiv.appendChild(statuswrapper);
   }
 
   //#region Description
-  if (!udata.isGroupDM && udata.description != undefined) {
+  if (!udata.isGroupDM && udata.description !== undefined) {
     const descwrapper = createContentWrapper(udata, 'description', 'descedit');
     // descwrapper.id = 'abtmewrapper';
 
@@ -249,7 +249,7 @@ export async function createProfilePopup(udata) {
   if (!udata.me) {
     const cid = localStorage.getItem('currentChatID');
     const uid = JSON.parse(localStorage.getItem('user')).uid;
-    if (cid != `${uid}|${uid}` && !cid.split('|').includes('0')) {
+    if (cid !== `${uid}|${uid}` && !cid.split('|').includes('0')) {
       const removeFriendBtn = document.createElement('button');
       removeFriendBtn.className = 'removeFriendBtn';
 
@@ -354,7 +354,7 @@ export function updateField(response) {
   }
   else {
     var params = { title: "", description: "", status: "", btnid: "" };
-    if (data.fieldname == 'desc') {
+    if (data.fieldname === 'desc') {
       params.title = 'description';
       params.description = data.newContent;
       params.btnid = 'descedit';
@@ -369,7 +369,7 @@ export function updateField(response) {
     if (inpEl) inpEl.replaceWith(createContentWrapper(params, params.title, params.btnid, false));
   }
 
-  if (data.fieldname == 'gctitle') {
+  if (data.fieldname === 'gctitle') {
     const dmbtn = document.getElementById(data.uid);
     if (!dmbtn) window.location.reload();
     const textNode = dmbtn.childNodes[1];
@@ -397,7 +397,7 @@ export function updateField(response) {
   }
 
   // change icon regardless
-  if (data.fieldname == 'icon') {
+  if (data.fieldname === 'icon') {
     //change the icon everywhere else
     const dmDiv = document.getElementById(data.uid);
     if (!dmDiv) return;

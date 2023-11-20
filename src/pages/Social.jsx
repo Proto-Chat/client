@@ -14,7 +14,7 @@ function SocialPage() {
     const ws = createWS();
 
     ws.addEventListener('open', () => {
-      if (localStorage.getItem('sessionid') && localStorage.getItem('sessionid') != "undefined") {
+      if (localStorage.getItem('sessionid') && localStorage.getItem('sessionid') !== "undefined") {
         ws.send(JSON.stringify({ code: 4, op: 0, sid: localStorage.getItem('sessionid') }));
       } else {
         window.location.href = '/';
@@ -35,7 +35,7 @@ function SocialPage() {
 
     ws.addEventListener('message', (message) => {
       const response = JSON.parse(message.data);
-      if (response == "401") return alert('401 UNAUTHORIZED');
+      if (response === "401") return alert('401 UNAUTHORIZED');
 
       switch (response.code) {
         case 0: window.location.href = '/';
@@ -47,13 +47,13 @@ function SocialPage() {
 
         case 4:
           const FRops = [2, 3, 4];
-          if (response.op == 0) {
+          if (response.op === 0) {
             getPFP();
             initializeSocialLayout(ws, response);
           }
-          else if (response.op == 1) recieveNewFriendRequest(ws, response);
+          else if (response.op === 1) recieveNewFriendRequest(ws, response);
           else if (FRops.includes(response.op)) getFriendRequestResponse(ws, response);
-          else if (response.op == 5) createPendingResponseBar({ username: response.data.username, uid: response.data.uid });
+          else if (response.op === 5) createPendingResponseBar({ username: response.data.username, uid: response.data.uid });
           else console.log(`UNKNOWN RESPONSE ${response.op}`);
           break;
 
@@ -84,7 +84,7 @@ function SocialPage() {
           <a href="-" onClick={() => switchDiv('connect')}>Add Friend</a>
         </div>
         <div id="friends">
-          <div id="loadinggif" style={{textAlign: "center"}}>
+          <div id="loadinggif" style={{ textAlign: "center" }}>
             <img src="https://www.wpfaster.org/wp-content/uploads/2013/06/loading-gif.gif" width="100px" alt="" />
           </div>
         </div>
