@@ -2,7 +2,7 @@ import { ws } from "./socket";
 import { createGIF, getGif } from "./gifs";
 import { createImage } from "./images";
 import { requestDM } from "./misc";
-import { playNotification } from "./playNotification";
+import { playNotification } from "./ts";
 import { createProfilePopup } from "./profile";
 import { API } from "./socket";
 
