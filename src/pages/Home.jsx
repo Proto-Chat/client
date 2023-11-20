@@ -98,13 +98,8 @@ function connectSocket() {
     bar.style.display = 'block';
 
     // try reconnecting
-    const timer = setInterval(() => {
+    setTimeout(() => {
       connectSocket();
-
-      ws.addEventListener('open', () => {
-        clearInterval(timer);
-        window.location.reload();
-      });
     }, 1000);
   });
 }

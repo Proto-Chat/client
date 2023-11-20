@@ -1,5 +1,5 @@
 import React from 'react';
-import { ws } from '../utils/socket';
+import { createWS, ws } from '../utils/socket';
 import '../styles/login.css';
 
 function recieveCode(data) {
@@ -51,6 +51,8 @@ function createConfcodeRequest() {
 
 function JoinPage() {
   React.useEffect(() => {
+    const ws = createWS();
+
     ws.addEventListener('error', (err) => {
       alert('Uh oh!\nAn error occured!');
       window.location.href = '/';

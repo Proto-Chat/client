@@ -13,6 +13,8 @@ function createWSPath() {
 export let ws = new WebSocket(createWSPath());
 
 export function createWS() {
+  console.log("CREATE WS");
+  // ws?.close();
   ws = new WebSocket(createWSPath());
   return ws;
 }
