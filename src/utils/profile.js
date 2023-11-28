@@ -127,20 +127,20 @@ export const pfpCloseFnct = () => {
     const uClickable = document.getElementsByClassName('userprofile')[0];
     if (uClickable) {
       uClickable.style.borderRight = 'black';
-      uClickable.style.width = '200px';
+      uClickable.style.width = '250px';
     }
   }
 }
 
 
 export function closeUserPopup(outlineDiv) {
-  document.body.style.backgroundColor = "#5c5c5c";
+  // document.body.style.backgroundColor = "#5c5c5c";
 
-  const maincontent = document.getElementById('maincontent');
-  const msgs = document.getElementById('messages');
+  // const maincontent = document.getElementById('maincontent');
+  // const msgs = document.getElementById('messages');
 
-  if (maincontent) maincontent.style.color = "var(--offwite)";
-  if (msgs) msgs.style.color = "var(--offwite)";
+  // if (maincontent) maincontent.style.color = "var(--offwite)";
+  // if (msgs) msgs.style.color = "var(--offwite)";
 
   outlineDiv.remove();
   window.removeEventListener('mousedown', pfpCloseFnct);
@@ -157,6 +157,7 @@ export async function createProfilePopup(udata) {
 
   //#region Title and icon
   const pfptitlediv = document.createElement('div');
+  pfptitlediv.className = 'pfptitlediv';
 
   if (udata.icon !== undefined) {
     const icon = document.createElement('img');
@@ -299,7 +300,7 @@ export async function createProfilePopup(udata) {
   else {
     const logoutAllSessionBtn = document.createElement('button');
     logoutAllSessionBtn.className = 'logoutallsessionsbtn';
-    logoutAllSessionBtn.innerText = 'LOG OUT OF ALL SESSIONS';
+    logoutAllSessionBtn.innerText = '⎋ LOG OUT OF ALL SESSIONS';
     logoutAllSessionBtn.onclick = () => {
       ws.send(JSON.stringify({
         code: 2,
@@ -320,16 +321,16 @@ export async function createProfilePopup(udata) {
 
   //Deal with the rest
   //Apply "dark shade" filter to the body
-  document.body.style.backgroundColor = "rgba(0,0,0,0.8)";
+  // document.body.style.backgroundColor = "rgba(0,0,0,0.8)";
 
-  const maincontent = document.getElementById('maincontent');
-  const msgs = document.getElementById('messages');
+  // const maincontent = document.getElementById('maincontent');
+  // const msgs = document.getElementById('messages');
 
-  if (maincontent) maincontent.style.color = "rgba(0,0,0)";
-  if (msgs) msgs.style.color = "rgba(0,0,0)";
-  udivCorner.style.width = (udivCorner.offsetWidth - 1) + 'px'
-  udivCorner.style.borderRight = "solid";
-  udivCorner.style.borderWidth = "1px";
+  // if (maincontent) maincontent.style.color = "rgba(0,0,0)";
+  // if (msgs) msgs.style.color = "rgba(0,0,0)";
+  // udivCorner.style.width = (udivCorner.offsetWidth - 1) + 'px'
+  // udivCorner.style.borderRight = "solid";
+  // udivCorner.style.borderWidth = "1px";
 }
 
 

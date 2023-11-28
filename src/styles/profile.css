@@ -3,21 +3,29 @@
   bottom: 0;
   left: 0;
   height: 80px;
-  width: 200px;
-  background-color: rgb(52, 52, 53);
+  width: 250px;
+  background-color: rgb(48, 47, 55);
   cursor: pointer;
   border-right: black;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px;
+  box-sizing: border-box;
+}
+
+.userprofile .optbar {
+  width: auto;
+  display: flex;
+  flex-direction: row;
+  gap: 16px;
 }
 
 .userprofile h1 {
   color: white;
-  margin: auto;
-  margin-right: 5px;
-  margin-left: 5px;
-  margin-top: 10px;
-  margin-bottom: 0px;
-  width: 190px;
-  
+  margin: 0;
+  font-size: 20px;
   white-space: nowrap;
   overflow: hidden; 
   text-overflow: ellipsis;
@@ -27,10 +35,12 @@
   font-size: 25px;
   width: 25px;
   height: 25px;
-  margin-top: -3px;
+  margin: 0;
   cursor: grab;
-  display: inline;
-  margin-right: 25px;
+}
+
+.settingsTrigger img {
+  margin: 0 !important;
 }
 
 .nopointer { cursor: default; }
@@ -43,32 +53,79 @@
 }
 
 .editinp {
-  width: 400px;
+  width: auto;
+  border: 0;
+  outline: 0;
+  background-color: rgb(78, 76, 87);
+  color: white;
+  border-radius: 8px;
   resize: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px;
+  font-size: 14px;
 }
 
 
 .profileoutlinediv {
-  background-color: #747373;
-  width: 50vw;
+  background-color: rgb(115, 114, 125);
+  border-radius: 12px;
+  width: min-content;
   height: auto;
-  min-height: 70vh;
+  position: fixed;
+  left: 50vw;
+  top: 50vh;
+  display: flex;
+  flex-direction: column;
+  transform: translate(-50%, -50%); 
   z-index: 1000;
-  margin: 0 auto;
-  position: absolute;
+  padding: 24px;
+  gap: 8px;
+  box-shadow: 0 0 24px rgb(0, 0, 0, 0.5);
+  width: 400px;
+}
+
+.profileoutlinediv > span {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 8px;
+}
+
+.profileoutlinediv > span > h5 {
+  text-transform: uppercase;
+  font-size: 14px;
+  color: rgb(168, 167, 178);
+}
+
+.pfptitlediv {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
+.pfptitlediv > h1 {
+  margin: 0;
+}
+
+.profileoutlinediv::before {
+  position: fixed;
+  top: 0;
   left: 0;
-  right: 0;
-  margin-top: 40px;
-  min-width: 100px;
-  box-shadow: 0 0 50px rgb(0, 0, 0);
-  padding: 10px;
+  width: 200vw;
+  height: 200vh;
+  transform: translate(-50%, -50%);
+  content: "";
+  background-color: #0008;
+  z-index: -10;
+  pointer-events: none;
 }
 
 .profileoutlinediv h1 {
   text-align: center;
   float: left;
-  margin-left: 10px;
-  margin-top: 30px;
 }
 
 .profileoutlinediv h5 {
@@ -83,6 +140,7 @@
 
 .pfp {
   margin: 0 auto;
+  position: relative;
   /* margin-left: -25%; */
   height: 100%;
   width: auto;
@@ -92,8 +150,9 @@
 .pfpupload {
   z-index: 10002;
   position: absolute;
-  left: 44px;
-  top: 33px;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
   font-size: 40px;
   cursor: pointer;
   color: #fff;
@@ -117,6 +176,7 @@ input[type="file"] {
 .pfpcrop {
   width: 100px;
   height: 100px;
+  position: relative;
   overflow: hidden;
   border-radius: 50%;
   border-style: solid;
@@ -132,15 +192,15 @@ input[type="file"] {
 }
 
 .dmBar {
-  margin-top: -75px;
-  background-color: #000;
+  margin-top: -64px;
+  background: linear-gradient(to right, rgb(23, 23, 27) 10px, rgb(23, 23, 27), rgb(42, 41, 48));
   position: fixed;
-  height: 75px;
+  height: 64px;
   z-index: 10;
   display: flex;
   align-items: center;
-  width: calc(100vw - 200px);
-  padding: 3px 10px 3px 10px;
+  width: calc(100vw - 250px);
+  padding: 8px 16px;
   cursor: pointer;
 }
 
@@ -195,10 +255,13 @@ input[type="file"] {
 .logoutallsessionsbtn {
   color: #ffffff;
   background-color: #e01b24;
+  white-space: pre;
   font-size: 19px;
   padding: 15px 50px;
   cursor: pointer;
   border-style: none;
+  margin-top: 16px;
+  border-radius: 8px;
 }
 
 .logoutallsessionsbtn:hover {

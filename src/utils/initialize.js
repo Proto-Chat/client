@@ -28,14 +28,14 @@ export function createPageMenu() {
   toHome.href = '/';
   toHome.classList.add('pageSwitchLink');
   toHome.classList.add('unselectable');
-  toHome.innerText = 'HOME';
+  toHome.innerText = '⌂ Home';
   e.appendChild(toHome);
 
   const toSocials = document.createElement('a');
   toSocials.href = '/social';
   toSocials.classList.add('pageSwitchLink');
   toSocials.classList.add('unselectable');
-  toSocials.innerText = 'SOCIALS';
+  toSocials.innerText = '# Socials';
   e.appendChild(toSocials);
 
   const createDm = document.createElement('a');
@@ -51,7 +51,7 @@ export function createPageMenu() {
   createDm.classList.add('pageSwitchLink');
   createDm.classList.add('unselectable');
   createDm.classList.add('addGroupDmBtn');
-  createDm.innerText = '+';
+  createDm.innerText = '+ New Group';
   e.appendChild(createDm);
 
   e.className = 'pageSwitchContainer';
@@ -176,7 +176,7 @@ export function setUpUser(user) {
 
   const optbar = document.createElement('div');
   optbar.style.paddingLeft = '10px';
-  optbar.className = 'nopointer';
+  optbar.classList.add('nopointer', 'optbar');
   optbar.appendChild(settingsTrigger);
   optbar.appendChild(logoutTrigger);
 
@@ -312,7 +312,7 @@ export function setupDM(response) {
 
     const uploadbtn = document.createElement('button');
     uploadbtn.className = 'fileUploadBtn';
-    uploadbtn.innerText = "+";
+    uploadbtn.innerText = "＋";
 
     uploadbtn.onclick = (e) => {
       e.preventDefault();

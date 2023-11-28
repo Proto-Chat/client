@@ -2,7 +2,7 @@ import { ws } from "./socket";
 import { createGIF, getGif } from "./gifs";
 import { createImage } from "./images";
 import { requestDM } from "./misc";
-import { playNotification } from "./ts";
+import { playNotification } from "./playNotification";
 import { createProfilePopup } from "./profile";
 import { API } from "./socket";
 
@@ -297,11 +297,11 @@ export function createNewMessage(msg) {
 
   container.className = 'messageContainer';
   container.appendChild(userDisplay);
-  container.appendChild(document.createElement('br'));
+  // container.appendChild(document.createElement('br'));
 
   if (msg.content.url && isValidUrl(msg.content.url) && msg.content.url.indexOf('media.tenor.com') !== -1) {
     msgContentContainer.appendChild(createGIF(msg.content));
-    msgContentContainer.style.height = '200px';
+    msgContentContainer.style.height = '250px';
   }
   else if (msg.content.filename) {
     //Get file
@@ -314,7 +314,7 @@ export function createNewMessage(msg) {
       if (!fileBuf) return;
 
       msgContentContainer.appendChild(createImage(fileBuf));
-      msgContentContainer.style.height = '200px';
+      msgContentContainer.style.height = '250px';
     }
 
     req.setRequestHeader('sessionid', localStorage.getItem('sessionid'));
@@ -446,7 +446,7 @@ export function createDmLink(dmRaw) {
       ws.send(JSON.stringify(closeDMWSObj));
     }
   };
-  a.classList.add('unselectable');
+  a.classList.add('unselectable', 'dm-link');
 
   //Get the PFP
   var req = new XMLHttpRequest();

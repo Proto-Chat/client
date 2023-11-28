@@ -1,30 +1,36 @@
 body {
-  background-color: #5c5c5c;
+  background-color: rgb(48, 47, 55);
   --offwite: rgb(233, 233, 233);
   margin-bottom: 0px;
   color: var(--offwite);
   font-family: monospace;
+  margin: 0;
+  border: 0;
+  outline: 0;
+  padding: 0;
 }
 
 .sidenav {
-  height: calc(100% - 100px);
-  width: 200px;
+  height: calc(100% - 80px);
+  width: 250px;
   position: fixed;
   z-index: 1;
   top: 0;
   left: 0;
-  background-color: #111;
+  background: linear-gradient(rgb(48, 47, 55) 50%, rgb(38, 37, 44));
   overflow-x: hidden;
-  padding-top: 20px;
   color: white;
 }
 
 .sidenav a {
-  padding: 6px 8px 6px 16px;
+  padding: 12px 20px;
   text-decoration: none;
-  font-size: 25px;
+  font-size: 20px;
   color: #999898;
-  display: block;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 16px;
   cursor: pointer;
   position: relative;
   
@@ -42,16 +48,15 @@ body {
 }
 
 .closeBtn {
-  float: right;
-  width: 30px;
-  height: 30px;
   display: none;
   clear: both;
   position: absolute;
-  right: 0px;
-  bottom: 5px;
+  right: 16px;
+  top: 50%;
+  transform: translate(0, -50%);
   background-color: transparent;
   border: none;
+  justify-self: end;
   color: rgb(145, 142, 142);
   font-size: 20px;
   cursor: pointer;
@@ -71,13 +76,8 @@ body {
 }
 
 .main {
-  margin-left: 180px; /* Same as the width of the sidenav */
+  margin-left: 250px; /* Same as the width of the sidenav */
   font-size: 28px; /* Increased text to enable scrolling */
-  padding: 0px 10px;
-}
-
-.msginp {
-  margin: 10px;
 }
 
 .msg {
@@ -96,67 +96,71 @@ body {
 }
 
 .msgauthor {
-  margin-bottom: 1px;
   font-weight: 700;
-  color: inherit;
+  font-size: 16px;
+  color: rgb(163, 162, 174);
   cursor: pointer;
 }
 
 .messageContainer {
-  margin-top: 15px;
-  margin-left: 15px;
+  margin-top: 20px;
+  margin-left: 20px;
   color: inherit;
   font-size: 20px;
   font-family: 'Roboto', sans-serif;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
 }
 
 .fileUploadBtn {
+  border-radius: 64px;
+  border-style: none;
+  background-color: rgb(136, 135, 147);
+  color: rgb(48, 47, 55);
+  font-weight: 900;
+  font-size: 20px;
   width: 30px;
   height: 30px;
-  margin-top: 10px;
-  margin-left: 10px;
-  border-radius: 50%;
-  border-style: none;
-  font-size: 30px;
-  text-align: center;
   display: flex;
   align-items: center;
+  justify-content: center;
   cursor: pointer;
 }
 
 .msginp {
-  background-color: #747373;
-  border-style: solid;
-  border-color: #000000;
-  border-radius: 8px;
+  background-color: rgb(78, 76, 87);
+  border-radius: 24px;
   position: fixed;
   bottom: 0;
-  width: calc(100% - 250px);
+  width: calc(100% - 312px);
   min-width: 100px;
-  min-height: 50px;
   display: flex;
-  margin: 10px;
-  margin-left: 30px;
+  margin: 16px 20px;
+  /* box-shadow: 0 8px 16px 0px #0004; */
+  display: flex;
+  flex-direction: row;
+  gap: 8px;
+  align-items: start;
+  padding: 12px 12px;
 }
 
 #messages {
-  height: calc(100vh - 145px);
+  height: calc(100vh - 250px);
   overflow-y: scroll;
-  margin-top: 75px;
+  margin-top: 64px;
+  padding: 32px 16px;
 }
 
 .msginp textarea {
-  width: 89%;
-  height: auto;
   background-color: inherit;
-  border: none;
-  border-radius: 16px;
-  margin: auto 5px auto 5px;
-  border-color: transparent;
+  flex: 1;
   color: #FAF9F6;
   font-size: 20px;
   resize: none;
   word-wrap: break-word;
+  border: 0;
+  margin-left: 8px;
 }
 
 .msginp textarea:focus {
@@ -164,15 +168,14 @@ body {
 }
 
 .msgbtnsend {
-  margin-top: auto;
-  margin-bottom: auto;
   right: 0;
-  height: 35px;
-  background-color:rgb(52, 52, 53);
+  padding: 6px 12px;
+  background-color: rgb(65, 63, 72);
   color: var(--offwite);
   border: solid;
   border-color: transparent;
-  border-radius: 10px;
+  border-radius: 64px;
+  margin: 0 !important;
 }
 
 .msgbtnsend:hover {
@@ -260,27 +263,32 @@ body {
 }
 
 .pageSwitchContainer {
-  margin-top: -10px;
   margin-bottom: 20px;
 }
 
 .pageSwitchLink {
-  border-bottom: solid #383737 1px;
+  border-bottom: solid rgb(73, 71, 82) 2px;
+  padding: 16px 32px !important;
+  background-color: rgb(48, 47, 55) !important;
+  font-size: 25px !important;
+}
+
+.pageSwitchLink:hover {
+  background-color: rgb(73, 71, 82) !important;
 }
 
 
 .removeFriendBtn {
   color: #ffffff;
-  background-color: #af000c;
+  background-color: #e01b24;
+  white-space: pre;
   font-size: 19px;
-  border-radius: 12px;
-  padding: 10px 40px;
+  padding: 15px 50px;
   cursor: pointer;
   border-style: none;
-  bottom: 20px;
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
+  margin-top: 16px;
+  border-radius: 8px;
+  width: 300px;
 }
 
 
@@ -352,4 +360,12 @@ body {
   .editinp {
       width: 200px;
   }
+}
+
+.msg img {
+  border-radius: 8px;
+  height: 100%;
+  object-fit: contain;
+  width: auto;
+  box-shadow: 0px 4px 8px 0 #0004;
 }
